@@ -2,7 +2,7 @@
   <div class="home-page">
     <div class="banner">
       <div class="container">
-        <h1 class="logo-font">conduit</h1>
+        <h1 class="logo-font">Univ-Community</h1>
         <p>A place to share your knowledge.</p>
       </div>
     </div>
@@ -20,50 +20,14 @@
               </li>
             </ul>
           </div>
+          <ArticlePreview 
+            v-for="article in feed"
+            :article="article"
+            :key="article.slug"
+            > 
+            </ArticlePreview>  
+          <ArticlePreview> </ArticlePreview>  
 
-          <div class="article-preview">
-            <div class="article-meta">
-              <a href="profile.html"
-                ><img src="http://i.imgur.com/Qr71crq.jpg"
-              /></a>
-              <div class="info">
-                <a href="" class="author">Eric Simons</a>
-                <span class="date">January 20th</span>
-              </div>
-              <button class="btn btn-outline-primary btn-sm pull-xs-right">
-                <i class="ion-heart"></i> 29
-              </button>
-            </div>
-            <a href="" class="preview-link">
-              <h1>How to build webapps that scale</h1>
-              <p>This is the description for the post.</p>
-              <span>Read more...</span>
-            </a>
-          </div>
-
-          <div class="article-preview">
-            <div class="article-meta">
-              <a href="profile.html"
-                ><img src="http://i.imgur.com/N4VcUeJ.jpg"
-              /></a>
-              <div class="info">
-                <a href="" class="author">Albert Pai</a>
-                <span class="date">January 20th</span>
-              </div>
-              <button class="btn btn-outline-primary btn-sm pull-xs-right">
-                <i class="ion-heart"></i> 32
-              </button>
-            </div>
-            <a href="" class="preview-link">
-              <h1>
-                The song you won't ever stop singing. No matter how hard you
-                try.
-              </h1>
-              <p>This is the description for the post.</p>
-              <span>Read more...</span>
-            </a>
-          </div>
-        </div>
 
         <div class="col-md-3">
           <div class="sidebar">
@@ -84,10 +48,29 @@
       </div>
     </div>
   </div>
+  </div>
+
 </template>
 
 
 <script lang='ts'>
-import Vue from 'vue';
-export default class Home extends Vue {}
+import {Vue, Component} from 'vue-property-decorator';
+import ArticlePreview from '@/components/article/ArticlePreview.vue';
+import articles from '@/store/modules/article';
+import { Article } from '@/store/model';
+
+@Component({
+  components: {
+    ArticlePreview,
+  },
+})
+export default class Home extends Vue {
+  public feed: Article[] = [];
+
+  public created() {
+    articles.refreshGlobalFeed().then((): void => {
+      this.feed = articles.globalFeed;
+    });
+  }
+}
 </script>

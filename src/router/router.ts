@@ -5,6 +5,10 @@ import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
 import Settings from '../views/Settings.vue';
 import Profile from '../views/Profile.vue';
+import Creator from '../views/ArticleCreate.vue';
+import Editor from '../views/ArticleEdit.vue';
+import Article from '../views/Article.vue';
+
 
 
 
@@ -23,18 +27,33 @@ const routes: RouteConfig[] = [
     component: Login,
   },
   {
-    path: '/Register',
-    name: 'Register',
+    path: '/register',
+    name: 'register',
     component: Register,
   },
   {
-    path: '/Settings',
-    name: 'Settings',
+    path: '/settings',
+    name: 'settings',
     component: Settings,
   },
   {
-    path: '/Profile',
-    name: 'Profile',
+    path: '/editor',
+    name: 'editor_new',
+    component: Creator,
+  },
+  {
+    path: '/editor/:article-slug',
+    name: 'editor_edit',
+    component: Editor,
+  },
+  {
+    path: '/article/:article-slug',
+    name: 'article',
+    component: Article,
+  },
+  {
+    path: '/:username',
+    name: 'profile',
     component: Profile,
   },
 ];
