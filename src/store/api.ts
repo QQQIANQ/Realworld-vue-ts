@@ -6,11 +6,11 @@ export const conduitApi = axios.create({
 });
 
 export function setJWT(jwt: string) {
-    conduitApi.defaults.headers.common.Authorization = 'Token ${jwt}';
+    conduitApi.defaults.headers.common.Authorization = `Token ${jwt}`;
 }
 
 export function clearJWT() {
-    delete  conduitApi.defaults.headers.common.Authorization;
+    delete conduitApi.defaults.headers.common.Authorization;
 }
 
 export async function loginUser(user: UserSubmit): Promise<User> {

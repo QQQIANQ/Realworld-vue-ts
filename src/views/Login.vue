@@ -58,6 +58,7 @@ export default class Login extends Vue {
       console.error(err);
       this.loginError = 'Invalid username or password';
     });
+    return 
     }
 }
 </script>

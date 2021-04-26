@@ -1,20 +1,20 @@
 import Vue from 'vue';
-import VueRouter, { RouteConfig } from 'vue-router';
+import Router from 'vue-router';
 import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
 import Settings from '../views/Settings.vue';
 import Profile from '../views/Profile.vue';
 import Editor from '../views/Editor.vue';
-import Article from '../views/Article.vue';
 
 
 
 
 
-Vue.use(VueRouter);
+Vue.use(Router);
 
-const routes: RouteConfig[] = [
+export default new Router({
+  routes: [
   {
     path: '/',
     name: 'h ome',
@@ -41,19 +41,9 @@ const routes: RouteConfig[] = [
     component: Editor,
   },
   {
-    path: '/article/:article-slug',
-    name: 'article',
-    component: Article,
-  },
-  {
     path: '/@:username',
     name: 'profile',
     component: Profile,
   },
-];
-
-const router = new VueRouter({
-  routes,
+],
 });
-
-export default router;
