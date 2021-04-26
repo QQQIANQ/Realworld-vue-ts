@@ -1,7 +1,9 @@
-import { Action, getModule, Module, Mutation, VuexModule } from 'vuex-module-decorators';
+import { Action, getModule, Module, Mutation, MutationAction, VuexModule } from 'vuex-module-decorators';
 import store from '@/store';
 import {Article} from '../model';
 import * as api from '@/store/api';
+type FeedType = 'global' | 'user';
+
 
 @Module({
     dynamic : true,
@@ -10,18 +12,15 @@ import * as api from '@/store/api';
     store,
 })
 class ArticlesModule extends VuexModule {
-    public globalFeed: Article[] = [];
-    public userFeed: Article[] = [];
+    public feed: Article[] = [];
 
-    @Mutation
-    public setGlobalFeed(articles: Article[]) {
-        this.globalFeed = articles;
+    @MutationAction
+    public async refreshFeed(feedType: FeedType) {
+      const globalFeed = await api.getGlobalFeed();
+      return {
+        feed: globalFeed.articles,
+      };
     }
-    @Action({commit: 'setGlobalFeed'})
-    public async refreshGlobalFeed() {
-        const globalFeed = await api.getGlobalFeed();
-        return globalFeed.articles;
-    }
-}
+  }
 
 export default getModule(ArticlesModule);

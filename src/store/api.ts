@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ArticleResponse, User, UserResponse, UserSubmit } from './model';
+import { ArticleResponse, Profile, ProfileResponse, User, UserForUpdate, UserResponse, UserSubmit } from './model';
 
 export const conduitApi = axios.create({
     baseURL: 'https://conduit.productionready.io/api',
@@ -13,21 +13,30 @@ export function clearJWT() {
     delete  conduitApi.defaults.headers.common.Authorization;
 }
 
-export async function loginUser(user: UserSubmit): Promise <User|undefined> {
-    try {
-        const response = await conduitApi.post('/users/login', {
-            user,
-        });
-        return (response.data as UserResponse).user;
-    } catch (e) {
-        // tslint:disable-next-line: no-console
-        console.error(e);
-    }
+export async function loginUser(user: UserSubmit): Promise<User> {
+    const response = await conduitApi.post('/users/login', {
+      user,
+    });
+    return (response.data as UserResponse).user;
+  }
+
+export async function fetchProfile(username: string): Promise<Profile> {
+    const response = await conduitApi.get('/profiles/${username}');
+    return (response.data as ProfileResponse).profile;
 }
+
+export async function fetchUser(): Promise<User> {
+    const response = await conduitApi.get('/user');
+    return (response.data as UserResponse).user;
+  }
 
 export async function getGlobalFeed() {
     const response = await conduitApi.get('/articles');
     return response.data as ArticleResponse;
 }
 
+export async function updateUser(user: UserForUpdate): Promise<User> {
+    const response = await conduitApi.put('/user', user);
+    return (response.data as UserResponse).user;
+  }
 

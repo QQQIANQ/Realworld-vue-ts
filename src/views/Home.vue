@@ -25,10 +25,8 @@
             :article="article"
             :key="article.slug"
             > 
-            </ArticlePreview>  
-          <ArticlePreview> </ArticlePreview>  
-
-
+          </ArticlePreview>  
+        </div>
         <div class="col-md-3">
           <div class="sidebar">
             <p>Popular Tags</p>
@@ -48,7 +46,6 @@
       </div>
     </div>
   </div>
-  </div>
 
 </template>
 
@@ -57,7 +54,6 @@
 import {Vue, Component} from 'vue-property-decorator';
 import ArticlePreview from '@/components/article/ArticlePreview.vue';
 import articles from '@/store/modules/article';
-import { Article } from '@/store/model';
 
 @Component({
   components: {
@@ -65,12 +61,11 @@ import { Article } from '@/store/model';
   },
 })
 export default class Home extends Vue {
-  public feed: Article[] = [];
-
-  public created() {
-    articles.refreshGlobalFeed().then((): void => {
-      this.feed = articles.globalFeed;
-    });
+  get feed() {
+    return articles.feed;
+  }
+  public async created() {
+    await articles.refreshFeed('global');
   }
 }
 </script>

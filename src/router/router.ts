@@ -5,8 +5,7 @@ import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
 import Settings from '../views/Settings.vue';
 import Profile from '../views/Profile.vue';
-import Creator from '../views/ArticleCreate.vue';
-import Editor from '../views/ArticleEdit.vue';
+import Editor from '../views/Editor.vue';
 import Article from '../views/Article.vue';
 
 
@@ -18,7 +17,7 @@ Vue.use(VueRouter);
 const routes: RouteConfig[] = [
   {
     path: '/',
-    name: 'Home',
+    name: 'h ome',
     component: Home,
   },
   {
@@ -38,12 +37,7 @@ const routes: RouteConfig[] = [
   },
   {
     path: '/editor',
-    name: 'editor_new',
-    component: Creator,
-  },
-  {
-    path: '/editor/:article-slug',
-    name: 'editor_edit',
+    name: 'editor',
     component: Editor,
   },
   {
@@ -52,7 +46,7 @@ const routes: RouteConfig[] = [
     component: Article,
   },
   {
-    path: '/:username',
+    path: '/@:username',
     name: 'profile',
     component: Profile,
   },

@@ -12,6 +12,13 @@ export interface User {
     bio: string;
     image?: null;
 }
+export interface UserForUpdate {
+    email?: string;
+    username?: string;
+    bio?: string;
+    password?: string;
+    image?: string;
+  }
 
 export interface UserSubmit {
     email: string;
@@ -21,6 +28,12 @@ export interface UserSubmit {
 export interface UserResponse {
     user: User;
 }
+
+export interface ProfileResponse {
+    profile: Profile;
+}
+
+
 
 export interface ArticleResponse {
     articles?: (Article)[] | null;

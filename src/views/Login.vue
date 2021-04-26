@@ -11,6 +11,10 @@
           </router-link>
         </p>
 
+        <ul class="error-messages" v-if="loginError">
+          <li>{{loginError}}</li>
+        </ul>
+
         <form>
           <fieldset class="form-group">
             <input class="form-control form-control-lg" 
@@ -43,12 +47,17 @@ import users from '@/store/modules/users';
 export default class Login extends Vue {
   public email = '';
   public password = '';
+  public loginError = '';
+
   public login() {
     users.login({
       email : this.email,
       password: this.password,
+    }).then(() => this.$router.push('/'))
+    .catch((err) => {
+      console.error(err);
+      this.loginError = 'Invalid username or password';
     });
-
     }
 }
 </script>
