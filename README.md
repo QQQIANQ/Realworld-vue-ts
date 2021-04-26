@@ -2,33 +2,46 @@
 
 ## Project setup
 ```
-npm install
+yarn/npm install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+yarn/npm run serve
 ```
 
 ### Compiles and minifies for production
 ```
-npm run build
+yarn/npm run build
 ```
 
 ### Run your unit tests
 ```
-npm run test:unit
+yarn/npm run test:unit
 ```
 
 ### Run your end-to-end tests
 ```
-npm run test:e2e
+yarn/npm run test:e2e
 ```
 
 ### Lints and fixes files
 ```
-npm run lint
+yarn/npm run lint
 ```
+### Running
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+the project is runing on localhost:8080
+
+### Login
+
+for login, you have to use a real account from the site demo-realworld.io
+
+### Something could be better
+
+the page profile is unfinished with a problem error 404, the site will be more
+
+complet with this part
+
+
+
